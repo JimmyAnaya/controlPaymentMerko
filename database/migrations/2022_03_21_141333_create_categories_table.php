@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_reports', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-
-            $table->date('date_in')->nullable();
-            $table->string('cash_in');
-            $table->integer('valuePayment');
+            $table->string('name_category');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_reports');
+        Schema::dropIfExists('categories');
     }
 };

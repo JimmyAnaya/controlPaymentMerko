@@ -15,6 +15,7 @@ class PaymentReport extends Model
     protected $fillable = [
 
         'user_id',
+        'category_id',
         'date',
         'cash_in',
         'valuePayment',
@@ -31,5 +32,10 @@ class PaymentReport extends Model
     public function getPaymentReportAttribute()
     {
         return Carbon::createFromFormat('Y-m-d', $this->attributes['date_in'])->format('m/d/Y');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

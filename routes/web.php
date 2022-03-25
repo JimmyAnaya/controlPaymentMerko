@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/home', PaymentReportController::class);
+Route::resource('/home/category', CategoryController::class);
 Route::get('/home/{id}/confirmDelete', [PaymentReportController::class, 'confirmDelete']);

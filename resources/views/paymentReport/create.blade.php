@@ -39,13 +39,16 @@
                 <div class="mb-3">
                     <label for="typePayment">Tipo de pago:</label>
                     <select name="typePayment" id="typePayment" class="form-select">
-                        <option>Abono</option>
-                        <option>Efectivo</option>
-                        <option>Factura de contrado</option>
-                        <option>Factura de credito</option>
-                        <option>Fin de caja</option>
-                        <option>Gastos</option>
+                        @foreach ($categories as $category)
+                            <option>{{ $category->name_category }}</option>
+                        @endforeach
+
                     </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label for="namePayment">Nombre o proveedor</label>
+                    <input type="text" class="form-control" id="namePayment" name="namePayment"
+                        placeholder="Nombre del pago" value="{{ old('namePayment') }}">
                 </div>
                 <div class="input-group mb-3">
                     <label for="valuePayment">Valor del pago</label>

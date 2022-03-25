@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentReportRequest;
+use App\Models\Category;
 use App\Models\PaymentReport;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,7 @@ class PaymentReportController extends Controller
     public function index()
     {
         return view('home', [
-            'paymentReports' => PaymentReport::all()
+            'paymentReports' => PaymentReport::orderBy('date_in', 'DESC')->get()
         ]);
     }
 
@@ -38,7 +40,10 @@ class PaymentReportController extends Controller
      */
     public function create()
     {
-        return view('paymentReport.create');
+
+        return view('paymentReport.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -50,11 +55,14 @@ class PaymentReportController extends Controller
     public function store(PaymentReportRequest $request)
     {
         $payment = new PaymentReport();
-
+        $payment->user_id = $request->User()->id;
         $payment->date_in = $request->get("date");
         $payment->cash_in = $request->get("typePayment");
+        $payment->name_payment = $request->get("namePayment");
         $payment->valuePayment = $request->get("valuePayment");
         $payment->save();
+
+
 
         return redirect('/home');
     }
